@@ -12,4 +12,8 @@ public class Project {
         this.id = id;
         this.name = name;
     }
+
+    public Project() {
+
+    }
 }
