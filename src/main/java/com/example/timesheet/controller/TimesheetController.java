@@ -50,7 +50,4 @@ public class TimesheetController {
         //204 no content
         return ResponseEntity.noContent().build();
     }
-
-
-
 }

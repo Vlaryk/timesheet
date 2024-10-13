@@ -31,7 +31,7 @@ public class TimesheetService {
 
     public Timesheet create(Timesheet timesheet) {
         if (projectService.getById(timesheet.getProjectId()).isEmpty()) {
-            return null;
+            throw new NoSuchElementException();
         }
         return repository.create(timesheet);
     }

@@ -3,6 +3,7 @@ package com.example.timesheet.controller;
 import com.example.timesheet.model.Project;
 import com.example.timesheet.model.Timesheet;
 import com.example.timesheet.service.ProjectService;
+import com.example.timesheet.service.TimesheetPageService;
 import com.example.timesheet.service.TimesheetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -19,29 +21,22 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TimesheetPageController {
 
-    private final TimesheetService timesheetService;
-    private final ProjectService projectService;
+    private final TimesheetPageService service;
+
+    @GetMapping
+    public String getAllTimesheets(Model model) {
+        List<TimesheetPageDto> timesheets = service.getAll();
+        model.addAttribute("timesheets",timesheets);
+        return "timesheets-page.html";
+    }
 
     @GetMapping("/{id}")
     public String getTimesheetPage(@PathVariable Long id, Model model) {
-        Optional<Timesheet> timesheetOpt = timesheetService.getById(id);
+        Optional<TimesheetPageDto> timesheetOpt = service.getById(id);
         if (timesheetOpt.isEmpty()) {
-            // FIXME вернуть страницу not found
-            throw new NoSuchElementException();
+            return "not-found.html";
         }
-
-        Timesheet timesheet = timesheetOpt.get();
-        Project project = projectService.getById(timesheet.getProjectId())
-                .orElseThrow();
-
-
-        TimesheetPageDto timesheetPageDto = new TimesheetPageDto();
-        timesheetPageDto.setProjectName(project.getName());
-        timesheetPageDto.setTimesheetId(String.valueOf(timesheet.getId()));
-        timesheetPageDto.setTimesheetMinutes(String.valueOf(timesheet.getMinutes()));
-        timesheetPageDto.setTimesheetCreatedAt(String.valueOf(timesheet.getCreatedAt()));
-
-        model.addAttribute("timesheet",timesheetPageDto);
+        model.addAttribute("timesheet",timesheetOpt.get());
         return "timesheet-page.html";
     }
 
