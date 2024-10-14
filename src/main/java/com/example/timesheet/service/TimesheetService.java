@@ -2,10 +2,8 @@ package com.example.timesheet.service;
 
 import com.example.timesheet.model.Timesheet;
 import com.example.timesheet.repository.TimesheetRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -22,21 +20,26 @@ public class TimesheetService {
     }
 
     public Optional<Timesheet> getById(Long id) {
-        return repository.getById(id);
+        return repository.findById(id);
     }
 
     public List<Timesheet> getAll() {
-        return repository.getAll();
+        return repository.findAll();
+    }
+
+    public List<Timesheet> getAll(LocalDate createdAtBefore,LocalDate createdAtAfter) {
+        //FIXME вернуть фильтрацию
+        return repository.findAll();
     }
 
     public Timesheet create(Timesheet timesheet) {
         if (projectService.getById(timesheet.getProjectId()).isEmpty()) {
             throw new NoSuchElementException();
         }
-        return repository.create(timesheet);
+        return repository.save(timesheet);
     }
 
     public void delete (Long id) {
-        repository.delete(id);
+        repository.deleteById(id);
     }
 }

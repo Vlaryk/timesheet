@@ -1,11 +1,8 @@
 package com.example.timesheet.controller;
 
 import com.example.timesheet.model.Project;
-import com.example.timesheet.model.Timesheet;
-import com.example.timesheet.repository.ProjectRepository;
 import com.example.timesheet.service.ProjectService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

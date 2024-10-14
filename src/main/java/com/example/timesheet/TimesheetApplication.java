@@ -21,9 +21,8 @@ public class TimesheetApplication {
 
 		for (int i = 1; i <= 5 ; i++) {
 			Project project = new Project();
-			project.setId((long) i);
 			project.setName("Project # " + i);
-			projectRepo.create(project);
+			projectRepo.save(project);
 		}
 
 		LocalDate createdAt = LocalDate.now();
@@ -31,11 +30,10 @@ public class TimesheetApplication {
 			createdAt = createdAt.plusDays(1);
 			Timesheet timesheet = new Timesheet();
 			timesheet.setProjectId(ThreadLocalRandom.current().nextLong(1,6));
-			timesheet.setId((long) i);
 			timesheet.setCreatedAt(createdAt);
 			timesheet.setMinutes(ThreadLocalRandom.current().nextInt(100,1000));
 
-			timesheetRepo.create(timesheet);
+			timesheetRepo.save(timesheet);
 		}
 	}
 
