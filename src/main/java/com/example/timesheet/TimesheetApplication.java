@@ -22,6 +22,7 @@ public class TimesheetApplication {
 		ApplicationContext ctx = SpringApplication.run(TimesheetApplication.class, args);
 		TimesheetRepository timesheetRepo = ctx.getBean(TimesheetRepository.class);
 		ProjectRepository projectRepo= ctx.getBean(ProjectRepository.class);
+		EmployeeRepository employeeRepo = ctx.getBean(EmployeeRepository.class);
 
 		for (int i = 1; i <= 5 ; i++) {
 			Project project = new Project();
@@ -34,6 +35,9 @@ public class TimesheetApplication {
 			employee.setFirstName("Иван" + i);
 			employee.setLastName("Петров");
 			employee.setSalary(111);
+
+			employeeRepo.save(employee);
+
 		}
 
 		LocalDate createdAt = LocalDate.now();
