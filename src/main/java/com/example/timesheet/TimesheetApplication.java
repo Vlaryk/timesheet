@@ -1,9 +1,12 @@
 package com.example.timesheet;
 
+import com.example.timesheet.model.Employee;
 import com.example.timesheet.model.Project;
 import com.example.timesheet.model.Timesheet;
+import com.example.timesheet.repository.EmployeeRepository;
 import com.example.timesheet.repository.ProjectRepository;
 import com.example.timesheet.repository.TimesheetRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -12,6 +15,7 @@ import java.time.LocalDate;
 import java.util.concurrent.ThreadLocalRandom;
 
 @SpringBootApplication
+@RequiredArgsConstructor
 public class TimesheetApplication {
 
 	public static void main(String[] args) {
@@ -23,6 +27,13 @@ public class TimesheetApplication {
 			Project project = new Project();
 			project.setName("Project # " + i);
 			projectRepo.save(project);
+		}
+
+		for (int i = 1; i <= 10; i++) {
+			Employee employee = new Employee();
+			employee.setFirstName("Иван" + i);
+			employee.setLastName("Петров");
+			employee.setSalary(111);
 		}
 
 		LocalDate createdAt = LocalDate.now();

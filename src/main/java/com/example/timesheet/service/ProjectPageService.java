@@ -7,15 +7,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ProjectPageService {
     private final ProjectService service;
 
-    public ProjectPageDto getProjectById(Long id) {
-        System.out.println(id);
-        return convert(service.getById(id).orElseThrow());
+    public Optional<ProjectPageDto> getProjectById(Long id) {
+        return service.getById(id).map(this::convert);
     }
 
     public List<ProjectPageDto> getAllProjects() {

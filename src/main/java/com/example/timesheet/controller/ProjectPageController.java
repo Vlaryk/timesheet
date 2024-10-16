@@ -1,5 +1,6 @@
 package com.example.timesheet.controller;
 
+import com.example.timesheet.model.Project;
 import com.example.timesheet.service.ProjectPageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/home/projects")
@@ -21,7 +23,11 @@ public class ProjectPageController {
 
     @GetMapping("/{id}")
     public String getById (@PathVariable Long id, Model model) {
-        model.addAttribute("project",service.getProjectById(id));
+        Optional<ProjectPageDto> project = service.getProjectById(id);
+        if (project.isEmpty()) {
+            return "not-found.html";
+        }
+        model.addAttribute("project",project.get());
         return "project-page.html";
     }
 
