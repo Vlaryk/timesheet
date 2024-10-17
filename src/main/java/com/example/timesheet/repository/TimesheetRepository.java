@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface TimesheetRepository extends JpaRepository<Timesheet,Long> {
 //    List<Timesheet> findByProjectId(Long projectId);
+    List<Timesheet> findTimesheetsByEmployeeId(Long id);
 
     @Query("select t from Timesheet t where t.projectId = :projectId order by t.createdAt desc")
     List<Timesheet> findByProjectId(Long projectId);

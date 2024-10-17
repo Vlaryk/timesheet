@@ -45,6 +45,7 @@ public class TimesheetApplication {
 			createdAt = createdAt.plusDays(1);
 			Timesheet timesheet = new Timesheet();
 			timesheet.setProjectId(ThreadLocalRandom.current().nextLong(1,6));
+			timesheet.setEmployeeId(ThreadLocalRandom.current().nextLong(1,11));
 			timesheet.setCreatedAt(createdAt);
 			timesheet.setMinutes(ThreadLocalRandom.current().nextInt(100,1000));
 

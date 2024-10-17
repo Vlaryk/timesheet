@@ -1,6 +1,7 @@
 package com.example.timesheet.service;
 
 import com.example.timesheet.model.Employee;
+import com.example.timesheet.model.Timesheet;
 import com.example.timesheet.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

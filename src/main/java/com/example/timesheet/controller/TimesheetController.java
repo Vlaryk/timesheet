@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/timesheets")
 public class TimesheetController {
 
 
@@ -21,7 +20,13 @@ public class TimesheetController {
         this.service = service;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("employees/{id}/timesheets")
+    public ResponseEntity<List<Timesheet>> findTimesheetsByEmployeeId(@PathVariable Long id) {
+
+        return ResponseEntity.ok(service.findTimesheetsByEmployeeId(id));
+    }
+
+    @GetMapping("/timesheets/{id}")
     public ResponseEntity<Timesheet> get(@PathVariable Long id) {
         Optional<Timesheet> ts = service.getById(id);
         if (ts.isPresent()) {
@@ -30,12 +35,12 @@ public class TimesheetController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping()
+    @GetMapping("/timesheets")
     public ResponseEntity<List<Timesheet>>getAll() {
         return ResponseEntity.ok(service.getAll());
     }
 
-    @PostMapping()
+    @PostMapping("/timesheets")
     public ResponseEntity<Timesheet> create(@RequestBody Timesheet timesheet) {
         timesheet = service.create(timesheet);
         if (timesheet == null) {
@@ -44,7 +49,7 @@ public class TimesheetController {
         return ResponseEntity.status(HttpStatus.CREATED).body(timesheet);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/timesheets/{id}")
     public ResponseEntity<Void> delete (@PathVariable Long id) {
         service.delete(id);
         //204 no content

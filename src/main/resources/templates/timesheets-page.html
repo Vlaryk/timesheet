@@ -20,9 +20,6 @@
 </tr>
 </thead>
 <tbody>
-<!--<tr th:if="${books.empty}">-->
-<!--    <td colspan="2"> No Books Available </td>-->
-<!--</tr>-->
 <tr th:each="timesheet : ${timesheets}">
     <td><span th:text="${timesheet.timesheetId}"></span></td>
     <td> <a th:href="@{'/home/projects/{id}' (id=${timesheet.projectId})}"><span th:text="${timesheet.projectName}"></span></a></td>

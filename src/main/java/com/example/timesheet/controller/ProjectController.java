@@ -29,12 +29,12 @@ public class ProjectController {
          return ResponseEntity.notFound().build();
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<Project>> getAll() {
         return ResponseEntity.ok(service.getAll());
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<Project> create(@RequestBody Project project) {
         project = service.create(project);
         return ResponseEntity.status(HttpStatus.CREATED).body(project);

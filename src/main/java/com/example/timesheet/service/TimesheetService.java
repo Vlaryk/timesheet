@@ -2,21 +2,22 @@ package com.example.timesheet.service;
 
 import com.example.timesheet.model.Timesheet;
 import com.example.timesheet.repository.TimesheetRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.*;
 
 @Component
+@RequiredArgsConstructor
 public class TimesheetService {
 
     private final ProjectService projectService;
 
     private final TimesheetRepository repository;
 
-    public TimesheetService(TimesheetRepository repository,ProjectService projectService) {
-        this.repository = repository;
-        this.projectService = projectService;
+    public List<Timesheet> findTimesheetsByEmployeeId(Long id) {
+        return repository.findTimesheetsByEmployeeId(id);
     }
 
     public Optional<Timesheet> getById(Long id) {

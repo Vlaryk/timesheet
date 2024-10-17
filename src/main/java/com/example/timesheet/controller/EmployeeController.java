@@ -1,6 +1,7 @@
 package com.example.timesheet.controller;
 
 import com.example.timesheet.model.Employee;
+import com.example.timesheet.model.Timesheet;
 import com.example.timesheet.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Employee> findEmployeePage(@PathVariable Long id) {
+    public ResponseEntity<Employee> findEmployee(@PathVariable Long id) {
         Optional<Employee> employeeOpt = service.findById(id);
         if (employeeOpt.isEmpty()) {
             throw new NoSuchElementException();
