@@ -1,4 +1,4 @@
-package com.example.timesheet.controller;
+package com.example.timesheet.rest;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
