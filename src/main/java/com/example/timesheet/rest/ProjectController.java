@@ -27,33 +27,63 @@ public class ProjectController {
         this.service = service;
     }
 
+
     @Operation(
-            summary = "get project",
-            description = "получить проект по id",
+            summary = "получить проект",
+            description = "возвращает проект по указанному id",
             responses = {
                     @ApiResponse (description = "Успешный ответ",responseCode = "200", content = @Content(schema = @Schema(implementation = Project.class))),
             }
     )
     @API.NotFoundResponse
+    @API.InternalServerError
     @GetMapping("/{id}")
-    public ResponseEntity<Project> getById(@PathVariable @Parameter(description = "ИИдентификатор проекта") Long id) {
+    public ResponseEntity<Project> getById(@PathVariable @Parameter(description = "Идентификатор проекта") Long id) {
          Optional<Project> project =  service.getById(id);
         return project.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+
+    @Operation(
+            summary = "получить все проекты",
+            description = "возвращает все проекты",
+            responses = {
+                    @ApiResponse (description = "Успешный ответ",responseCode = "200", content = @Content(schema = @Schema(implementation = Project.class))),
+            }
+    )
+    @API.InternalServerError
     @GetMapping
     public ResponseEntity<List<Project>> getAll() {
         return ResponseEntity.ok(service.getAll());
     }
 
+
+    @Operation(
+            summary = "создать проект",
+            description = "создает проект",
+            responses = {
+                    @ApiResponse (description = "Проект успешно создан",responseCode = "201", content = @Content(schema = @Schema(implementation = Project.class))),
+            }
+    )
+    @API.InternalServerError
     @PostMapping
-    public ResponseEntity<Project> create(@RequestBody Project project) {
+    public ResponseEntity<Project> create(@Parameter(description = "Проект")@RequestBody Project project) {
         project = service.create(project);
         return ResponseEntity.status(HttpStatus.CREATED).body(project);
     }
 
+
+    @Operation(
+            summary = "удалить проект",
+            description = "удалитяет проект",
+            responses = {
+                    @ApiResponse (description = "Проект успешно удален",responseCode = "204", content = @Content(schema = @Schema(implementation = Void.class))),
+            }
+    )
+    @API.NoContent
+    @API.InternalServerError
     @DeleteMapping("/{id}")
-    public  ResponseEntity<Void> delete (Long id) {
+    public  ResponseEntity<Void> delete (@Parameter(description = "Идентификатор проекта")Long id) {
         service.delete(id);
 
         return ResponseEntity.noContent().build();
