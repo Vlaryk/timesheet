@@ -1,5 +1,5 @@
 package com.example.timesheet.service;
-import com.example.timesheet.controller.EmployeePageDto;
+import com.example.timesheet.Page.EmployeePageDto;
 import com.example.timesheet.model.Employee;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

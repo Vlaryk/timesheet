@@ -1,4 +1,4 @@
-package com.example.timesheet.controller;
+package com.example.timesheet.Page;
 
 import com.example.timesheet.service.ProjectPageService;
 import lombok.RequiredArgsConstructor;

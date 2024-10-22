@@ -1,4 +1,4 @@
-package com.example.timesheet.controller;
+package com.example.timesheet.Page;
 
 import lombok.Data;
 
