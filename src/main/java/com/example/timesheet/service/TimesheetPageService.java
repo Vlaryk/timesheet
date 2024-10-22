@@ -30,7 +30,7 @@ public class TimesheetPageService {
     }
 
     public Optional<TimesheetPageDto> getById(Long id) {
-        return timesheetService.getById(id).map(this::convert);
+        return timesheetService.findById(id).map(this::convert);
     }
 
     public List<TimesheetPageDto> getAll () {

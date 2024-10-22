@@ -1,17 +1,23 @@
 package com.example.timesheet.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
 
-public enum Role {
-    ADMIN("admin"),USER("user");
-    private final String name;
+@Entity
+@Data
+@Table(name = "roles")
+public class Role {
+//    ADMIN("admin"),USER("user");
 
-    Role(String name) {
-        this.name = name;
-    }
+    @Id
+    @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
 
-    public String getName() {
-        return name;
-    }
+//    @Column(name = "user_id")
+//    private Long userId;
+
+    private String name;
 }

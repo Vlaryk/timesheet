@@ -53,7 +53,7 @@ public class TimesheetController {
     @API.InternalServerError
     @GetMapping("/timesheets/{id}")
     public ResponseEntity<Timesheet> getById(@Parameter(description = "Идентификатор таймшита")@PathVariable Long id) {
-        Optional<Timesheet> ts = service.getById(id);
+        Optional<Timesheet> ts = service.findById(id);
         if (ts.isPresent()) {
             return ResponseEntity.ok().body(ts.get());
         }

@@ -1,5 +1,6 @@
 package com.example.timesheet.service;
 
+import com.example.timesheet.aspect.Timer;
 import com.example.timesheet.model.Timesheet;
 import com.example.timesheet.repository.TimesheetRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import java.util.*;
 
 @Component
 @RequiredArgsConstructor
+@Timer
 public class TimesheetService {
 
     private final ProjectService projectService;
@@ -20,7 +22,8 @@ public class TimesheetService {
         return repository.findTimesheetsByEmployeeId(id);
     }
 
-    public Optional<Timesheet> getById(Long id) {
+//    @Timer
+    public Optional<Timesheet> findById(Long id) {
         return repository.findById(id);
     }
 
@@ -40,6 +43,7 @@ public class TimesheetService {
         return repository.save(timesheet);
     }
 
+//    @Timer(enabled = false)
     public void delete (Long id) {
         repository.deleteById(id);
     }
