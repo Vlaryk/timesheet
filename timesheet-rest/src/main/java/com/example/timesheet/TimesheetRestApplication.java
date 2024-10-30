@@ -5,6 +5,7 @@ import com.example.timesheet.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.ApplicationContext;
 
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @SpringBootApplication
 @RequiredArgsConstructor
+@EnableDiscoveryClient
 public class TimesheetRestApplication {
 
 	public static void main(String[] args) {

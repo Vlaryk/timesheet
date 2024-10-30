@@ -1,6 +1,5 @@
 package com.example.timesheet.security;
 
-import com.example.timesheet.model.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 //import org.springframework.security.config.Customizer;
@@ -15,8 +14,8 @@ import org.springframework.context.annotation.Configuration;
 //    SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception{
 //        return http
 //                .authorizeHttpRequests(requests -> requests
-//                        .requestMatchers("/home/project/**").hasAuthority("admin")
-//                        .requestMatchers("/home/timesheets/**").hasAnyAuthority("admin,user")
+//                        .requestMatchers("//project/**").hasAuthority("admin")
+//                        .requestMatchers("//timesheets/**").hasAnyAuthority("admin,user")
 //                        .anyRequest().authenticated()
 //                )
 //                .formLogin(Customizer.withDefaults())

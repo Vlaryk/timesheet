@@ -1,11 +1,5 @@
 package com.example.timesheet.security;
 
-import com.example.timesheet.model.Role;
-import com.example.timesheet.model.User;
-import com.example.timesheet.model.UserRole;
-import com.example.timesheet.repository.RoleRepository;
-import com.example.timesheet.repository.UserRepository;
-import com.example.timesheet.repository.UserRoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.authority.SimpleGrantedAuthority;
