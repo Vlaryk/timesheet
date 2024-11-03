@@ -1,3 +1,5 @@
-1. Повторить код с урока
-2. Запустить Eureka, запустить 2 части (rest + page)
-3. В качестве результата работы прислать 1 скриншот со страницы /localhost:8761, где видно оба запущенных приложения
+1. Протестировать TimesheetController
+   1. GET /timesheets/{id}
+   2. GET /timesheets
+   3. POST /timesheets
+   4. DELETE /timesheets{id}

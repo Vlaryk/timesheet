@@ -83,7 +83,7 @@ public class ProjectController {
     @API.NoContent
     @API.InternalServerError
     @DeleteMapping("/{id}")
-    public  ResponseEntity<Void> delete (@Parameter(description = "Идентификатор проекта")Long id) {
+    public  ResponseEntity<Void> delete (@PathVariable @Parameter(description = "Идентификатор проекта") Long id) {
         service.delete(id);
 
         return ResponseEntity.noContent().build();
