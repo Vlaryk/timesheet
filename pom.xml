@@ -25,7 +25,8 @@
         <module>timesheet-rest</module>
 		<module>timesheet-page</module>
 		<module>server-eureka</module>
-	</modules>
+        <module>logging-starter</module>
+    </modules>
     <scm>
 		<connection/>
 		<developerConnection/>

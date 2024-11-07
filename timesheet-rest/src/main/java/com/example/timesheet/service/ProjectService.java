@@ -1,5 +1,6 @@
 package com.example.timesheet.service;
 
+import com.example.aspect.logging.Logging;
 import com.example.timesheet.model.Project;
 import com.example.timesheet.model.Timesheet;
 import com.example.timesheet.repository.ProjectRepository;
@@ -18,13 +19,16 @@ public class ProjectService {
     private final ProjectRepository projectRepository;
     private final TimesheetRepository timesheetRepository;
 
+    @Logging
     public Optional<Project> getById(Long id) {
         return projectRepository.findById(id);
     }
 
+
     public List<Project> getAll() {
         return projectRepository.findAll();
     }
+
 
     public Project create(Project project) {
         return projectRepository.save(project);

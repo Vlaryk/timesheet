@@ -1,5 +1,2 @@
-1. Протестировать TimesheetController
-   1. GET /timesheets/{id}
-   2. GET /timesheets
-   3. POST /timesheets
-   4. DELETE /timesheets{id}
+1. Доделать logging-aspect: добавить настройку boolean PrintArgs = false.
+если значение true, тогда в аспекте логировать значения аргументов

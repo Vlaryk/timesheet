@@ -1,4 +1,9 @@
 #spring.application.name=timesheet
+application:
+  logging:
+    enabled: true
+    level: WARN
+
 server:
   port: 8080
 spring:
