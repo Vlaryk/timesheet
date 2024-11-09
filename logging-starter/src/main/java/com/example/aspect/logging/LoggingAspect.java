@@ -29,11 +29,33 @@ public class LoggingAspect {
     @Around(value = "loggingPointCut() || loggingTypePointCut()")
     public Object loggingMethod(ProceedingJoinPoint pjp) throws Throwable{
         String methodName = pjp.getSignature().getName();
-        log.atLevel(properties.getLevel()).log("Before -> TimesheetService#{}", methodName);
-        try {
-            return pjp.proceed();
-        } finally {
-            log.atLevel(properties.getLevel()).log("After -> TimesheetService#{}", methodName);
+        if (!properties.isPrintArgs()) {
+            log.atLevel(properties.getLevel()).log("Before -> TimesheetService#{}", methodName);
+            try {
+                return pjp.proceed();
+            } finally {
+                log.atLevel(properties.getLevel()).log("After -> TimesheetService#{}", methodName);
+            }
+        } else {
+            String r;
+            if (pjp.getArgs().length > 0) {
+                StringBuilder res = new StringBuilder("TimesheetService." + methodName + "(");
+                for (int i = 0; i < pjp.getArgs().length; i++) {
+                    Object arg = pjp.getArgs()[i];
+                    res.append(arg.getClass().getSimpleName()).append(" = ").append(arg).append(",");
+                }
+                res.deleteCharAt(res.length() - 1).append(")");
+                r = String.valueOf(res);
+                log.atLevel(properties.getLevel()).log("Before -> " + r);
+            } else {
+                r = "TimesheetService.{}()" + methodName;
+                log.atLevel(properties.getLevel()).log("Before -> " + r);
+            }
+            try {
+                return pjp.proceed();
+            } finally {
+                log.atLevel(properties.getLevel()).log("After -> " + r);
+            }
         }
     }
 }
