@@ -22,6 +22,18 @@ public class TimesheetService {
         return repository.findTimesheetsByEmployeeId(id);
     }
 
+    public List<Timesheet> findTimesheetsByProjectId (Long id) {
+        if (projectService.getById(id).isEmpty()) {
+            throw new NoSuchElementException("Project with id " + id + "does not exist");
+        }
+
+        return repository.findByProjectId(id);
+    }
+
+    public List<Timesheet> findByCreatedAtBetween(LocalDate min, LocalDate max) {
+        return repository.findByCreatedAtBetween(min, max);
+    }
+
 //    @Timer
     public Optional<Timesheet> findById(Long id) {
         return repository.findById(id);

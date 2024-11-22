@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.timesheet.service.TimesheetService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,8 +30,22 @@ public class TimesheetController {
     }
 
     @Operation(
-            summary = "получить таймшит по id сотрудника",
-            description = "возвращает таймшит по id сотрудника",
+            summary = "получить таймшиты по id проекта",
+            description = "возвращает таймшиты по id проекта",
+            responses = {
+                    @ApiResponse(description = "Успешный ответ",responseCode = "200", content = @Content(schema = @Schema(implementation = Timesheet.class))),
+            }
+    )
+    @API.NotFoundResponse
+    @API.InternalServerError
+    @GetMapping("/projects/{id}/timesheets")
+    public ResponseEntity<List<Timesheet>> findTimesheetsByProjectId(@Parameter(description = "Идентификатор проекта")@PathVariable Long id) {
+        return ResponseEntity.ok(service.findTimesheetsByProjectId(id));
+    }
+
+    @Operation(
+            summary = "получить таймшиты по id сотрудника",
+            description = "возвращает таймшиты по id сотрудника",
             responses = {
                     @ApiResponse(description = "Успешный ответ",responseCode = "200", content = @Content(schema = @Schema(implementation = Timesheet.class))),
             }
@@ -63,16 +78,25 @@ public class TimesheetController {
 
 
     @Operation(
-            summary = "получить все таймшиты",
-            description = "возвращает все таймшиты",
+            summary = "получить все таймшиты или таймшиты указанные во временном промежутке",
+            description = "получить все таймшиты или таймшиты указанные во временном промежутке",
             responses = {
                     @ApiResponse (description = "Успешный ответ",responseCode = "200", content = @Content(schema = @Schema(implementation = Timesheet.class))),
             }
     )
     @API.InternalServerError
     @GetMapping("/timesheets")
-    public ResponseEntity<List<Timesheet>>getAll() {
-        return ResponseEntity.ok(service.getAll());
+    public ResponseEntity<List<Timesheet>>getAll(@Parameter(description = "Будут показываться таймшиты созданные после этой даты")
+                                                     @RequestParam(required = false) LocalDate createdAtAfter,
+                                                 @Parameter(description = "Будут показываться таймшиты созданные до этой даты")
+                                                     @RequestParam(required = false) LocalDate createdAtBefore) {
+        if (createdAtAfter == null) {
+            createdAtAfter = LocalDate.of(1,1,1);
+        }
+        if (createdAtBefore == null) {
+            createdAtBefore = LocalDate.of(9999,12,31);
+        }
+        return ResponseEntity.ok(service.findByCreatedAtBetween(createdAtAfter,createdAtBefore));
     }
 
     @Operation(
@@ -94,7 +118,7 @@ public class TimesheetController {
 
     @Operation(
             summary = "удалить таймшит",
-            description = "удалитяет таймшит",
+            description = "удаляет таймшит",
             responses = {
                     @ApiResponse (description = "Таймшит успешно удален",responseCode = "204", content = @Content(schema = @Schema(implementation = Void.class))),
             }

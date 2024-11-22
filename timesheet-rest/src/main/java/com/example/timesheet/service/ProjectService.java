@@ -37,12 +37,4 @@ public class ProjectService {
     public void delete (Long id) {
         projectRepository.deleteById(id);
     }
-
-    public List<Timesheet> getTimesheets (Long id) {
-        if (projectRepository.findById(id).isEmpty()) {
-            throw new NoSuchElementException("Project with id " + id + "does not exist");
-        }
-
-        return timesheetRepository.findByProjectId(id);
-    }
 }

@@ -15,5 +15,6 @@ public interface TimesheetRepository extends JpaRepository<Timesheet,Long> {
     @Query("select t from Timesheet t where t.projectId = :projectId order by t.createdAt desc")
     List<Timesheet> findByProjectId(Long projectId);
 
+    @Query("select t from Timesheet t where t.createdAt > :min and t.createdAt < :max")
     List<Timesheet> findByCreatedAtBetween(LocalDate min, LocalDate max);
 }
