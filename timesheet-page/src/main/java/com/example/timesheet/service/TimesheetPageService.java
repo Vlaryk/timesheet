@@ -3,10 +3,7 @@ package com.example.timesheet.service;
 import com.example.timesheet.Page.TimesheetPageDto;
 import com.example.timesheet.client.ProjectResponse;
 import com.example.timesheet.client.TimesheetResponse;
-import com.netflix.appinfo.InstanceInfo;
-import com.netflix.discovery.shared.Application;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.core.ParameterizedTypeReference;
@@ -21,12 +18,9 @@ import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Service
+@RequiredArgsConstructor
 public class TimesheetPageService {
     private final DiscoveryClient discoveryClient;
-
-    public TimesheetPageService(DiscoveryClient discoveryClient) {
-        this.discoveryClient = discoveryClient;
-    }
 
     private RestClient restClient() {
         List<ServiceInstance> instances = discoveryClient.getInstances("TIMESHEET-REST");
@@ -81,5 +75,7 @@ public class TimesheetPageService {
         }
         return result;
     }
+
+    //FIXME обавить конвертер
 
 }
