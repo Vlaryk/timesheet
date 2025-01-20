@@ -22,10 +22,16 @@
 <tbody>
 <tr th:each="timesheet : ${timesheets}">
     <td><span th:text="${timesheet.timesheetId}"></span></td>
-    <td> <a th:href="@{'//projects/{id}' (id=${timesheet.projectId})}"><span th:text="${timesheet.projectName}"></span></a></td>
+    <td> <a th:href="@{'/projects/{id}' (id=${timesheet.projectId})}"><span th:text="${timesheet.projectName}"></span></a></td>
     <td><span th:text="${timesheet.timesheetMinutes}"></span></td>
     <td><span th:text="${timesheet.timesheetCreatedAt}"></span></td>
     <td><a th:href="@{'/timesheets/{id}' (id=${timesheet.timesheetId})}">Перейти к записи</a></td>
+    <td>
+        <form th:action="@{'http://localhost:8080/timesheets/{id}' (id=${timesheet.timesheetId})}" method="post">
+            <input type="hidden" name="_method" value="delete" />
+            <button type="submit" style="color: red; cursor: pointer;">Удалить</button>
+        </form>
+    </td>
 </tr>
 </tbody>
 </table>

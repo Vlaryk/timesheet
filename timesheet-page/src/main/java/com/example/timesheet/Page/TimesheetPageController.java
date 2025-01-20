@@ -21,6 +21,7 @@ public class TimesheetPageController {
     public String getAllTimesheets(Model model) {
         List<TimesheetPageDto> timesheets = service.getAll();
         model.addAttribute("timesheets",timesheets);
+//        System.out.println(ti);
         return "timesheets-page.html";
     }
 

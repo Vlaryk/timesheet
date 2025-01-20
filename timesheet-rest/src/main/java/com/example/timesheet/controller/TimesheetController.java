@@ -127,6 +127,7 @@ public class TimesheetController {
     @API.InternalServerError
     @DeleteMapping("/timesheets/{id}")
     public ResponseEntity<Void> delete (@Parameter(description = "Идентификатор таймшита")@PathVariable Long id) {
+        System.out.println("d");
         service.delete(id);
         //204 no content
         return ResponseEntity.noContent().build();

@@ -46,6 +46,7 @@ public class TimesheetPageService {
                     .uri("/projects/" + timesheet.getProjectId())
                     .retrieve()
                     .body(ProjectResponse.class);
+            timesheetPageDto.setProjectId(String.valueOf(project.getId()));
             timesheetPageDto.setProjectName(project.getName());
             return Optional.of(timesheetPageDto);
         } catch (HttpClientErrorException.NotFound e) {
@@ -70,6 +71,7 @@ public class TimesheetPageService {
                     .uri("/projects/" + timesheet.getProjectId())
                     .retrieve()
                     .body(ProjectResponse.class);
+            timesheetPageDto.setProjectId(String.valueOf(project.getId()));
             timesheetPageDto.setProjectName(project.getName());
             result.add(timesheetPageDto);
         }
