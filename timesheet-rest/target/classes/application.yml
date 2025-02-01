@@ -11,10 +11,10 @@ spring:
   application:
     name: timesheet-rest
     datasource:
-      url: jdbc:h2:mem:test
+      url: jdbc:mysql://localhost:3306/mydb
       username: sa
       password:
-      driver-class-name: org.h2.Driver
+      driver-class-name: com.mysql.jdbc.Driver
   jpa:
     show-sql: false
 eureka:
